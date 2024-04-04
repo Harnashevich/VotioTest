@@ -24,6 +24,7 @@ public final class VoteCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = 16
         view.backgroundColor = .white
+        view.clipsToBounds = true
         return view
     }()
     
@@ -34,7 +35,7 @@ public final class VoteCell: UITableViewCell {
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.text = "Голосование за звание лучшего игрока"
+        label.text = "Голосование за звание лучшего"
         return label
     }()
     
@@ -52,8 +53,7 @@ public final class VoteCell: UITableViewCell {
     
     private lazy var ballImageView: UIImageView = {
         let image = UIImageView()
-        image.tintColor = .lightGray.withAlphaComponent(0.5)
-        image.image = UIImage(systemName: "soccerball")
+        image.image = UIImage(named: "VotioLogo")
         return image
     }()
     
@@ -110,10 +110,10 @@ extension VoteCell {
             dateLabel.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20),
             dateLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            ballImageView.topAnchor.constraint(equalTo: titleView.topAnchor),
             ballImageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-            ballImageView.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
-            ballImageView.widthAnchor.constraint(equalTo: ballImageView.heightAnchor)
+            ballImageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            ballImageView.widthAnchor.constraint(equalToConstant: 100),
+            ballImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }

@@ -7,23 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F48B4C72BB5AA7700631BC0 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */; };
+		9F48B4C92BB5AC1400631BC0 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4C82BB5AC1400631BC0 /* PlayerCell.swift */; };
+		9F48B4CB2BB5B98200631BC0 /* RatePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */; };
 		9F6297062BB30323005F9E77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297052BB30323005F9E77 /* AppDelegate.swift */; };
 		9F6297082BB30323005F9E77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297072BB30323005F9E77 /* SceneDelegate.swift */; };
-		9F62970A2BB30323005F9E77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297092BB30323005F9E77 /* ViewController.swift */; };
-		9F62970D2BB30323005F9E77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F62970B2BB30323005F9E77 /* Main.storyboard */; };
+		9F62970A2BB30323005F9E77 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297092BB30323005F9E77 /* VoteViewController.swift */; };
 		9F62970F2BB30325005F9E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F62970E2BB30325005F9E77 /* Assets.xcassets */; };
 		9F6297122BB30325005F9E77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6297102BB30325005F9E77 /* LaunchScreen.storyboard */; };
+		9F6FC8DC2BBEB0E100DA3E3F /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */; };
+		9F6FC8DE2BBEB14E00DA3E3F /* HelloResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8DD2BBEB14E00DA3E3F /* HelloResponseModel.swift */; };
+		9F6FC8E12BBEB69900DA3E3F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E02BBEB69900DA3E3F /* Alamofire */; };
+		9F6FC8E32BBEB69900DA3E3F /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E22BBEB69900DA3E3F /* AlamofireDynamic */; };
+		9F6FC8E62BBEB6D700DA3E3F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E52BBEB6D700DA3E3F /* SDWebImage */; };
+		9F6FC8E82BBEB6D700DA3E3F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E72BBEB6D700DA3E3F /* SDWebImageMapKit */; };
+		9F6FC8EA2BBEC8D300DA3E3F /* PollsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */; };
+		9F6FC8EC2BBECE9800DA3E3F /* PollResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */; };
+		9F6FC8EE2BBED09F00DA3E3F /* PlayerResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */; };
+		9F8D99922BB4530400A0BB0A /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D99912BB4530400A0BB0A /* VoteCell.swift */; };
+		9F8D99942BB4536300A0BB0A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D99932BB4536300A0BB0A /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
+		9F48B4C82BB5AC1400631BC0 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
+		9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatePlayerViewController.swift; sourceTree = "<group>"; };
 		9F6297022BB30323005F9E77 /* VotioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VotioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6297052BB30323005F9E77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F6297072BB30323005F9E77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9F6297092BB30323005F9E77 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9F62970C2BB30323005F9E77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9F6297092BB30323005F9E77 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = ../VoteViewController.swift; sourceTree = "<group>"; };
 		9F62970E2BB30325005F9E77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F6297112BB30325005F9E77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F6297132BB30325005F9E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		9F6FC8DD2BBEB14E00DA3E3F /* HelloResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloResponseModel.swift; sourceTree = "<group>"; };
+		9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsResponseModel.swift; sourceTree = "<group>"; };
+		9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollResponseModel.swift; sourceTree = "<group>"; };
+		9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerResponseModel.swift; sourceTree = "<group>"; };
+		9F8D99912BB4530400A0BB0A /* VoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
+		9F8D99932BB4536300A0BB0A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F6FC8E62BBEB6D700DA3E3F /* SDWebImage in Frameworks */,
+				9F6FC8E12BBEB69900DA3E3F /* Alamofire in Frameworks */,
+				9F6FC8E82BBEB6D700DA3E3F /* SDWebImageMapKit in Frameworks */,
+				9F6FC8E32BBEB69900DA3E3F /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +82,56 @@
 		9F6297042BB30323005F9E77 /* VotioTest */ = {
 			isa = PBXGroup;
 			children = (
+				9F6FC8DA2BBEB06900DA3E3F /* Managers */,
+				9F6FC8D92BBEB05900DA3E3F /* Models */,
+				9F6FC8D82BBEB04A00DA3E3F /* Views */,
+				9F6FC8D72BBEB02700DA3E3F /* Controllers */,
 				9F6297052BB30323005F9E77 /* AppDelegate.swift */,
 				9F6297072BB30323005F9E77 /* SceneDelegate.swift */,
-				9F6297092BB30323005F9E77 /* ViewController.swift */,
-				9F62970B2BB30323005F9E77 /* Main.storyboard */,
 				9F62970E2BB30325005F9E77 /* Assets.xcassets */,
 				9F6297102BB30325005F9E77 /* LaunchScreen.storyboard */,
 				9F6297132BB30325005F9E77 /* Info.plist */,
+				9F8D99932BB4536300A0BB0A /* Extensions.swift */,
 			);
 			path = VotioTest;
+			sourceTree = "<group>";
+		};
+		9F6FC8D72BBEB02700DA3E3F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9F6297092BB30323005F9E77 /* VoteViewController.swift */,
+				9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */,
+				9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9F6FC8D82BBEB04A00DA3E3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9F8D99912BB4530400A0BB0A /* VoteCell.swift */,
+				9F48B4C82BB5AC1400631BC0 /* PlayerCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9F6FC8D92BBEB05900DA3E3F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9F6FC8DD2BBEB14E00DA3E3F /* HelloResponseModel.swift */,
+				9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */,
+				9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */,
+				9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9F6FC8DA2BBEB06900DA3E3F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +150,12 @@
 			dependencies = (
 			);
 			name = VotioTest;
+			packageProductDependencies = (
+				9F6FC8E02BBEB69900DA3E3F /* Alamofire */,
+				9F6FC8E22BBEB69900DA3E3F /* AlamofireDynamic */,
+				9F6FC8E52BBEB6D700DA3E3F /* SDWebImage */,
+				9F6FC8E72BBEB6D700DA3E3F /* SDWebImageMapKit */,
+			);
 			productName = VotioTest;
 			productReference = 9F6297022BB30323005F9E77 /* VotioTest.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +184,10 @@
 				Base,
 			);
 			mainGroup = 9F6296F92BB30323005F9E77;
+			packageReferences = (
+				9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 9F6297032BB30323005F9E77 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +204,6 @@
 			files = (
 				9F6297122BB30325005F9E77 /* LaunchScreen.storyboard in Resources */,
 				9F62970F2BB30325005F9E77 /* Assets.xcassets in Resources */,
-				9F62970D2BB30323005F9E77 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +214,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F62970A2BB30323005F9E77 /* ViewController.swift in Sources */,
+				9F8D99942BB4536300A0BB0A /* Extensions.swift in Sources */,
+				9F48B4CB2BB5B98200631BC0 /* RatePlayerViewController.swift in Sources */,
+				9F62970A2BB30323005F9E77 /* VoteViewController.swift in Sources */,
+				9F6FC8DE2BBEB14E00DA3E3F /* HelloResponseModel.swift in Sources */,
+				9F6FC8EA2BBEC8D300DA3E3F /* PollsResponseModel.swift in Sources */,
+				9F6FC8EE2BBED09F00DA3E3F /* PlayerResponseModel.swift in Sources */,
+				9F6FC8EC2BBECE9800DA3E3F /* PollResponseModel.swift in Sources */,
+				9F48B4C92BB5AC1400631BC0 /* PlayerCell.swift in Sources */,
+				9F6FC8DC2BBEB0E100DA3E3F /* APICaller.swift in Sources */,
 				9F6297062BB30323005F9E77 /* AppDelegate.swift in Sources */,
 				9F6297082BB30323005F9E77 /* SceneDelegate.swift in Sources */,
+				9F8D99922BB4530400A0BB0A /* VoteCell.swift in Sources */,
+				9F48B4C72BB5AA7700631BC0 /* PlayersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9F62970B2BB30323005F9E77 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9F62970C2BB30323005F9E77 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9F6297102BB30325005F9E77 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,9 +375,9 @@
 				INFOPLIST_FILE = VotioTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +385,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = wwwwwopq8e90d8cg.VotioTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -325,9 +407,9 @@
 				INFOPLIST_FILE = VotioTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +417,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = wwwwwopq8e90d8cg.VotioTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -363,6 +449,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9F6FC8E02BBEB69900DA3E3F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		9F6FC8E22BBEB69900DA3E3F /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		9F6FC8E52BBEB6D700DA3E3F /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		9F6FC8E72BBEB6D700DA3E3F /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F6296FA2BB30323005F9E77 /* Project object */;
 }

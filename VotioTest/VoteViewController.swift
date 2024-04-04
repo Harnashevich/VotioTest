@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VoteViewController: UIViewController {
+public final class VoteViewController: UIViewController {
     
     //MARK: - UI
     
@@ -28,12 +28,24 @@ class VoteViewController: UIViewController {
     
     //MARK: - Lifecycle
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         title = "Voting list"
         view.backgroundColor = .white
-        view.addSubview(tableView)      
+        view.addSubview(tableView)
         setConstraints()
+        
+        APICaller.shared.getPlayer(id: 1) { [weak self] reuslt in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                switch reuslt {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }
 
@@ -47,12 +59,12 @@ extension VoteViewController {
 
 extension VoteViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         20
     }
     
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: VoteCell.identifier,
             for: indexPath
@@ -68,8 +80,10 @@ extension VoteViewController: UITableViewDataSource {
 
 extension VoteViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("TAP TAP")
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = PlayersViewController()
+        vc.title = "Player voting"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

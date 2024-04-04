@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+// MARK: - PlayerResponseModel
+struct PlayerResponseModel: Codable {
+    let success: Int
+    let result: Player
+}
+
+// MARK: - Result
+struct Player: Codable {
+    let id: Int
+    let name, number, amplua: String
+    let photo: String
+}
