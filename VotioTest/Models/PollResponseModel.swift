@@ -10,15 +10,15 @@ import Foundation
 // MARK: - PollResponseModel
 struct PollResponseModel: Codable {
     let success: Int
-    let result: Poll
+    let result: PollDetails
 }
 
 // MARK: - Result
-struct Poll: Codable {
+struct PollDetails: Codable {
     let id: Int
     let title, type, dateStart, dateEnd: String
     let isArchive: Int
-    let playersVotingType: String
+    let playersVotingType: MatchResultsModel
     let playersVoting: [PlayersVoting]
     let stage: Int
 }

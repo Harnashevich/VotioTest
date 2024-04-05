@@ -48,3 +48,40 @@ extension UIStackView {
     }
 }
 
+extension String {
+    
+    var currentFormatt: String {
+        let olDateFormatter = DateFormatter()
+        olDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let oldDate = olDateFormatter.date(from: self)
+        
+        let convertDateFormatter = DateFormatter()
+        convertDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        convertDateFormatter.dateFormat = "d MMMM HH:mm"
+        
+        return convertDateFormatter.string(from: oldDate ?? Date())
+    }
+}
+
+extension UIButton {
+    
+    func setScoreWithPlus(score: Int) {
+        self.setTitle("" + String(score), for: .normal)
+    }
+    
+    func set(score: Int) {
+        self.setTitle(String(score), for: .normal)
+    }
+}
+
+extension UILabel {
+    
+    func setText(with number: Int?) {
+        guard let number = number else {
+            self.text = ""
+            return
+        }
+        self.text = String(number)
+    }
+}

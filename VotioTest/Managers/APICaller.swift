@@ -132,8 +132,6 @@ extension APICaller {
         headers: HTTPHeaders? = nil,
         completion: @escaping ((Result<T, Error>)) -> Void
     ) {
-        print("URL \(Constents.baseURL + path)")
-        
         AF.request(
             Constents.baseURL + path,
             method: method,

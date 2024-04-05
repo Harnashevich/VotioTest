@@ -44,7 +44,7 @@ public final class VoteCell: UITableViewCell {
         label.textColor = .blue
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 4
-        label.font = .systemFont(ofSize: 10, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.backgroundColor = .blue.withAlphaComponent(0.1)
         label.textAlignment = .center
         label.text = " 12.03.2024 14:30 "
@@ -54,6 +54,13 @@ public final class VoteCell: UITableViewCell {
     private lazy var ballImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "VotioLogo")
+        return image
+    }()
+    
+    private lazy var calendarImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "calendar")
+        image.tintColor = .blue
         return image
     }()
     
@@ -70,6 +77,11 @@ public final class VoteCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public override func prepareForReuse() {
+        titleLabel.text = nil
+        dateLabel.text = nil
+    }
 }
 
 //MARK: - Methods
@@ -78,11 +90,14 @@ extension VoteCell {
     
     private func configureUI() {
         addBorderColor(voteView, titleView)
-        contentView.addSubviews(voteView, titleView, dateLabel)
+        contentView.addSubviews(voteView, titleView, dateLabel, calendarImageView)
         titleView.addSubviews(ballImageView, titleLabel)
     }
     
-    func configureCell() {
+    func configureCell(with poll: Poll) {
+        titleLabel.text = "\(poll.playersVotingType) " + poll.title
+        let pollDate = "\(poll.dateStart.currentFormatt) - \(poll.dateEnd.currentFormatt)"
+        dateLabel.text = (poll.isArchive == 0) ? pollDate : "Finished"
     }
 }
 
@@ -109,6 +124,10 @@ extension VoteCell {
             
             dateLabel.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20),
             dateLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            calendarImageView.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10),
+            calendarImageView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
+            
             
             ballImageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             ballImageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),

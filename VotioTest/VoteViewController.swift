@@ -26,6 +26,8 @@ public final class VoteViewController: UIViewController {
     
     //MARK: - Variables
     
+    private var polls = [Poll]()
+    
     //MARK: - Lifecycle
 
     public override func viewDidLoad() {
@@ -34,13 +36,25 @@ public final class VoteViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(tableView)
         setConstraints()
+        fetchPolls()
         
-        APICaller.shared.getPlayer(id: 1) { [weak self] reuslt in
+        // set font for title
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+    }
+}
+
+//MARK: - Methods
+
+extension VoteViewController {
+    
+    private func fetchPolls() {
+        APICaller.shared.getPolls { [weak self] reuslt in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch reuslt {
                 case .success(let data):
-                    print(data)
+                    self.polls = data.result
+                    self.tableView.reloadData()
                 case .failure(let error):
                     print(error)
                 }
@@ -49,18 +63,12 @@ public final class VoteViewController: UIViewController {
     }
 }
 
-//MARK: - Methods
-
-extension VoteViewController {
-    
-}
-
 //MARK: - UITableViewDataSource
 
 extension VoteViewController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        20
+        polls.count
     }
     
     
@@ -71,7 +79,7 @@ extension VoteViewController: UITableViewDataSource {
         ) as? VoteCell else {
             fatalError()
         }
-        cell.configureCell()
+        cell.configureCell(with: polls[indexPath.row])
         return cell
     }
 }
@@ -81,7 +89,7 @@ extension VoteViewController: UITableViewDataSource {
 extension VoteViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PlayersViewController()
+        let vc = PlayersViewController(pollId: polls[indexPath.row].id)
         vc.title = "Player voting"
         self.navigationController?.pushViewController(vc, animated: true)
     }

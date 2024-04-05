@@ -24,6 +24,7 @@
 		9F6FC8EA2BBEC8D300DA3E3F /* PollsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */; };
 		9F6FC8EC2BBECE9800DA3E3F /* PollResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */; };
 		9F6FC8EE2BBED09F00DA3E3F /* PlayerResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */; };
+		9F6FC8F32BC0074A00DA3E3F /* MatchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8F22BC0074A00DA3E3F /* MatchResultsModel.swift */; };
 		9F8D99922BB4530400A0BB0A /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D99912BB4530400A0BB0A /* VoteCell.swift */; };
 		9F8D99942BB4536300A0BB0A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D99932BB4536300A0BB0A /* Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsResponseModel.swift; sourceTree = "<group>"; };
 		9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollResponseModel.swift; sourceTree = "<group>"; };
 		9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerResponseModel.swift; sourceTree = "<group>"; };
+		9F6FC8F22BC0074A00DA3E3F /* MatchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchResultsModel.swift; sourceTree = "<group>"; };
 		9F8D99912BB4530400A0BB0A /* VoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
 		9F8D99932BB4536300A0BB0A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 		9F6297042BB30323005F9E77 /* VotioTest */ = {
 			isa = PBXGroup;
 			children = (
+				9F6FC8EF2BBEE12200DA3E3F /* Other */,
 				9F6FC8DA2BBEB06900DA3E3F /* Managers */,
 				9F6FC8D92BBEB05900DA3E3F /* Models */,
 				9F6FC8D82BBEB04A00DA3E3F /* Views */,
@@ -122,6 +125,7 @@
 				9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */,
 				9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */,
 				9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */,
+				9F6FC8F22BC0074A00DA3E3F /* MatchResultsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,6 +136,13 @@
 				9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		9F6FC8EF2BBEE12200DA3E3F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +229,7 @@
 				9F48B4CB2BB5B98200631BC0 /* RatePlayerViewController.swift in Sources */,
 				9F62970A2BB30323005F9E77 /* VoteViewController.swift in Sources */,
 				9F6FC8DE2BBEB14E00DA3E3F /* HelloResponseModel.swift in Sources */,
+				9F6FC8F32BC0074A00DA3E3F /* MatchResultsModel.swift in Sources */,
 				9F6FC8EA2BBEC8D300DA3E3F /* PollsResponseModel.swift in Sources */,
 				9F6FC8EE2BBED09F00DA3E3F /* PlayerResponseModel.swift in Sources */,
 				9F6FC8EC2BBECE9800DA3E3F /* PollResponseModel.swift in Sources */,

@@ -33,6 +33,7 @@ public final class RateViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
         label.text = "Rate"
+        label.textColor = .black
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 22, weight: .bold)
         return label
@@ -59,8 +60,19 @@ public final class RateViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.setTitle("Deselect", for: .normal)
+        button.isHidden = true
+        button.addTarget(self, action: #selector(deselectButtonTap), for: .touchUpInside)
         return button
     }()
+    
+    //MARK: - Variables
+    
+    var playerId: Int?
+    var scores = [Int]()
+    
+    private var matchResult: MatchResultsModel?
+    private var oldScore: Int?
+    private var selectedScore: Int?
     
     //MARK: - Lifecycle
     
@@ -73,33 +85,12 @@ public final class RateViewController: UIViewController {
         view.addSubview(blurEffectView)
         view.addSubviews(rateView, titleLabel, topStackView, bottomStackView, deselectButton)
         view.addBorderColor(rateView)
+        
         rateView.addSubview(closeButton)
         
-        for _ in 0...4 {
-            let button: UIButton = {
-                let button = UIButton()
-                button.setTitle("+10", for: .normal)
-                button.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-                button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
-                button.backgroundColor = .blue.withAlphaComponent(0.5)
-                return button
-            }()
-            
-            topStackView.addArrangedSubview(button)
-        }
+        configureStack(topStackView)
+        configureStack(bottomStackView)
         
-        for _ in 0...4 {
-            let button: UIButton = {
-                let button = UIButton()
-                button.setTitle("-1", for: .normal)
-                button.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-                button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
-                button.backgroundColor = .blue.withAlphaComponent(0.5)
-                return button
-            }()
-
-            bottomStackView.addArrangedSubview(button)
-        }
         setConstraints()
     }
     
@@ -113,14 +104,112 @@ public final class RateViewController: UIViewController {
         self.topStackView.layoutIfNeeded()
         self.bottomStackView.layoutIfNeeded()
     }
+    
+    //MARK: - Callbacks
+    
+    var ratePlayerClosure: ((Int, Int) -> ())?
 }
 
 //MARK: - Methods
 
 extension RateViewController {
     
+    //MARK: - Public
+    
+    func set(selectedScore: Int) {
+        self.selectedScore = selectedScore
+        oldScore = selectedScore
+        deselectButton.isHidden = false
+    }
+    
+    func setView(playerId: Int, matchResult: MatchResultsModel, availabelScores: [Int]) {
+        self.matchResult = matchResult
+        self.playerId = playerId
+        self.scores = availabelScores
+        setupButtons(for: matchResult)
+    }
+    
+    //MARK: - Private
+    
+    private func setupButtons(for result: MatchResultsModel) {
+        result.scores.enumerated().forEach { index, score in
+            if index < 5,
+               let button = topStackView.arrangedSubviews[index] as? UIButton {
+                setup(button: button, withScore: score)
+            } else if let button = bottomStackView.arrangedSubviews[index - 5] as? UIButton {
+                setup(button: button, withScore: score)
+            }
+        }
+    }
+    
+    private func setup(button: UIButton, withScore score: Int) {
+        if score < 0 {
+            button.set(score: score)
+        } else {
+            button.setScoreWithPlus(score: score)
+        }
+        
+        guard self.scores.contains(score) else {
+            button.isEnabled = false
+            button.backgroundColor = .lightGray
+            button.setTitleColor(.black, for: .normal)
+            return
+        }
+        guard let selectedScore = selectedScore,
+              selectedScore == score else {
+            button.backgroundColor = score > 0 ? .blue.withAlphaComponent(0.2) : .red.withAlphaComponent(0.2)
+            button.setTitleColor(score > 0 ? .blue : .red,
+                                 for: .normal)
+            return
+        }
+        button.backgroundColor = .black
+        button.setTitleColor(.white, for: .normal)
+    }
+    
+    private func configureStack(_ stack: UIStackView) {
+        for _ in 0...4 {
+            let button: UIButton = {
+                let button = UIButton()
+                button.addTarget(self, action: #selector(ratingButtonTap), for: .touchUpInside)
+                button.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+                button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
+                button.backgroundColor = .blue.withAlphaComponent(0.2)
+                return button
+            }()
+            
+            stack.addArrangedSubview(button)
+        }
+    }
+    
+    @objc private func ratingButtonTap(_ sender: UIButton) {
+        print("Score \(sender.titleLabel?.text)")
+        let rating = Int(sender.titleLabel?.text ?? "0") ?? 0
+        selectedScore = rating
+        
+        guard let rating = selectedScore else {
+            return
+        }
+        if let playerId = self.playerId {
+            self.ratePlayerClosure?(playerId, rating)
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func deselectButtonTap() {
+        print("Deselect")
+        if let playerId = self.playerId {
+            self.ratePlayerClosure?(playerId, 0)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @objc private func closeScreen() {
-        dismiss(animated: true)
+        if let playerId = self.playerId {
+            self.ratePlayerClosure?(playerId, oldScore ?? 0)
+        }
+        self.dismiss(animated: true)
     }
 }
 

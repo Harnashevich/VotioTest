@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import SDWebImage
+
+protocol PlayerCellDelegate: AnyObject {
+    func scoreTapped(_ cell: PlayerCell, indexPathRow: Int)
+}
 
 public final class PlayerCell: UITableViewCell {
     
     static let identifier = String(describing: PlayerCell.self)
+    
+    weak var delegate: PlayerCellDelegate?
     
     //MARK: - UI
     
@@ -24,14 +31,14 @@ public final class PlayerCell: UITableViewCell {
         let image = UIImageView()
         image.tintColor = .lightGray.withAlphaComponent(0.5)
         image.layer.cornerRadius = 8
-        image.image = UIImage(systemName: "soccerball")
+        image.clipsToBounds = true
         return image
     }()
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .left
         label.text = "Lionel Messi"
         return label
@@ -40,7 +47,7 @@ public final class PlayerCell: UITableViewCell {
     private lazy var positionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
-        label.backgroundColor = .red.withAlphaComponent(0.1)
+//        label.backgroundColor = .red.withAlphaComponent(0.1)
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textAlignment = .left
         label.layer.cornerRadius = 4
@@ -49,15 +56,16 @@ public final class PlayerCell: UITableViewCell {
         return label
     }()
     
-    private var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.scoreTapped))
+        stack.addGestureRecognizer(gesture)
         return stack
     }()
     
     private var scoreLabel: UILabel = {
         var label = UILabel()
-        label.text = "5.0"
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 20
         label.isHidden = true
@@ -74,11 +82,15 @@ public final class PlayerCell: UITableViewCell {
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 20
         label.textAlignment = .center
-        //        label.isHidden = true
+        label.isHidden = false
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.backgroundColor = .blue.withAlphaComponent(0.2)
         return label
     }()
+    
+    //MARK: - Variables
+    
+    var indexPathRow: Int?
     
     //MARK: - Initialization
     
@@ -93,11 +105,25 @@ public final class PlayerCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public override func prepareForReuse() {
+        nameLabel.text = nil
+        positionLabel.text = nil
+        playerImageView.image = nil
+        indexPathRow = nil
+    }
 }
 
 //MARK: - Methods
 
 extension PlayerCell {
+    
+    //MARK: - Private
+    
+    @objc private func scoreTapped(_ sender:UITapGestureRecognizer) {
+        guard let indexPathRow else { return }
+        delegate?.scoreTapped(self, indexPathRow: indexPathRow)
+    }
     
     private func configureUI() {
         contentView.addSubviews(
@@ -112,7 +138,45 @@ extension PlayerCell {
         addBorderColor(playerView, playerImageView)
     }
     
-    func configureCell() {
+    //MARK: - Public
+    
+    func setScore(_ score: Int) {
+        if score == 0 {
+            plusLabel.isHidden = false
+            scoreLabel.isHidden = true
+        } else if score < 0 {
+            plusLabel.isHidden = true
+            scoreLabel.isHidden = false
+            scoreLabel.backgroundColor = .red.withAlphaComponent(0.2)
+            scoreLabel.textColor = .red
+            scoreLabel.setText(with: score)
+        } else {
+            plusLabel.isHidden = true
+            scoreLabel.isHidden = false
+            scoreLabel.backgroundColor = .blue.withAlphaComponent(0.2)
+            scoreLabel.textColor = .blue
+            scoreLabel.text = "\(score)"
+        }
+    }
+    
+    func configureCell(with player: PlayersVoting, indexPatn: IndexPath) {
+        indexPathRow = indexPatn.row
+        nameLabel.text = player.name
+
+        let attrString = NSMutableAttributedString(string: player.number + " " + player.amplua)
+        attrString.addAttributes(
+            [
+                .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+                .foregroundColor: UIColor.black
+            ],
+            range: NSRange(location: 0, length: player.number.count)
+        )
+        
+        positionLabel.attributedText = attrString
+        playerImageView.sd_setImage(
+            with: URL(string: player.photo),
+            placeholderImage: UIImage(systemName: "soccerball")
+        )
     }
 }
 
