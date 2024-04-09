@@ -86,6 +86,9 @@ public final class RateViewController: UIViewController {
         view.addSubviews(rateView, titleLabel, topStackView, bottomStackView, deselectButton)
         view.addBorderColor(rateView)
         
+        let closeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeScreen))
+        blurEffectView.addGestureRecognizer(closeGestureRecognizer)
+        
         rateView.addSubview(closeButton)
         
         configureStack(topStackView)
@@ -119,7 +122,9 @@ extension RateViewController {
     func set(selectedScore: Int) {
         self.selectedScore = selectedScore
         oldScore = selectedScore
-        deselectButton.isHidden = false
+        deselectButton.isHidden = (selectedScore == 0)
+        
+        print("selectedScore \(selectedScore)")
     }
     
     func setView(playerId: Int, matchResult: MatchResultsModel, availabelScores: [Int]) {

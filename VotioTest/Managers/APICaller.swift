@@ -19,10 +19,10 @@ final class APICaller {
         static let baseURL = "http://vt.lab42.pro"
         static let appToken = "eRwbD24t435gfwqefgc3"
         static var uIDevice: String {
-            guard let uIDevice = UIDevice.current.identifierForVendor?.uuidString else {
-                return String()
-            }
-            return uIDevice
+//            guard let uIDevice = UIDevice.current.identifierForVendor?.uuidString else {
+//                return String()
+//            }
+            return "9989r423к5"
         }
     }
     
@@ -31,8 +31,8 @@ final class APICaller {
         static let getPolls = "/api/v1.0/get-polls"
         static let getPoll = "/api/v1.0/get-poll/"
         static let getPlayer = "/api/v1.0/get-player/"
+        static let votePollPlayers = "/api/v1.0/vote-poll-players"
     }
-    
 }
 
 //MARK: - API public methods
@@ -119,6 +119,32 @@ extension APICaller {
             }
         }
     }
+    
+    func votePollPlayers(
+        id: Int,
+        playersScores: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        createRequest(
+            path: Endpoints.votePollPlayers,
+            method: .post,
+            parameters: [
+                "id": id,
+                "votes": playersScores
+            ],
+            headers: [
+                "App-Token": "\(Constents.appToken)",
+                "Uuid": "\(Constents.uIDevice)"
+            ]
+        ) { (result: Result<SimpleResponseModel, Error>) in
+            switch result {
+            case .success(_):
+                completion(true)
+            case.failure(_):
+                completion(false)
+            }
+        }
+    }
 }
 
 //MARK: - API private methods
@@ -132,6 +158,9 @@ extension APICaller {
         headers: HTTPHeaders? = nil,
         completion: @escaping ((Result<T, Error>)) -> Void
     ) {
+        
+        print("UUID")
+        print(Constents.uIDevice)
         AF.request(
             Constents.baseURL + path,
             method: method,

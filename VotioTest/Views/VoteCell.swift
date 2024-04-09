@@ -35,7 +35,6 @@ public final class VoteCell: UITableViewCell {
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.text = "Голосование за звание лучшего"
         return label
     }()
     
@@ -47,7 +46,6 @@ public final class VoteCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.backgroundColor = .blue.withAlphaComponent(0.1)
         label.textAlignment = .center
-        label.text = " 12.03.2024 14:30 "
         return label
     }()
     
@@ -95,7 +93,7 @@ extension VoteCell {
     }
     
     func configureCell(with poll: Poll) {
-        titleLabel.text = "\(poll.playersVotingType) " + poll.title
+        titleLabel.text = "\(poll.playersVotingType) id \(poll.id) " + poll.title
         let pollDate = "\(poll.dateStart.currentFormatt) - \(poll.dateEnd.currentFormatt)"
         dateLabel.text = (poll.isArchive == 0) ? pollDate : "Finished"
     }
@@ -127,7 +125,6 @@ extension VoteCell {
             
             calendarImageView.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10),
             calendarImageView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
-            
             
             ballImageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             ballImageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),

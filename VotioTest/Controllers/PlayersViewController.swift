@@ -36,6 +36,13 @@ public class PlayersViewController: UIViewController {
         return button
     }()
     
+    //MARK: - Enum
+    
+    enum VoteStage {
+        case notVoted
+        case voted
+    }
+    
     //MARK: - Variables
     
     private let pollId: Int
@@ -43,12 +50,19 @@ public class PlayersViewController: UIViewController {
     
     private var playersScoreDictionary: [Int: Int] = [:]
     private var availableScores = [Int]()
+//    private var playersVotingStats: [PlayersVoting] = [] {
+//        didSet {
+//            tableView.reloadData()
+//        }
+//    }
     
     private var playersList = [PlayersVoting]() {
         didSet {
             tableView.reloadData()
         }
     }
+    
+    private var voteStage: VoteStage = .voted
     
     //MARK: - Initialization
     
@@ -87,10 +101,34 @@ extension PlayersViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
+                    
+                    switch data.result.stage {
+                    case 1:
+                        self.voteStage = .notVoted
+                        self.playersList = data.result.playersVoting
+                    case 2:
+                        self.voteStage = .voted
+                        self.playersList = data.result.playersVotingStats
+                        self.voteButton.isHidden = true
+                    default:
+                        break
+                    }
+                    
+                    
                     self.pollDetails = data.result
-                    self.playersList = data.result.playersVoting
+                   
                     self.availableScores = data.result.playersVotingType.scores
+
+                    self.playersList.forEach {
+                        self.playersScoreDictionary[$0.id] = 0
+                    }
+                    
+                    print("playersScoreDictionary")
+                    print(self.playersScoreDictionary)
+                    
+                    self.createFooter()
                     self.tableView.reloadData()
+                    
                 case .failure(let error):
                     print(error)
                 }
@@ -100,7 +138,7 @@ extension PlayersViewController {
     
     private func upodateScoreForPlayer(withPlayerId playerId: Int, toScore score: Int) {
         if score == 0 {
-            self.playersScoreDictionary[playerId] = nil
+            self.playersScoreDictionary[playerId] = /*nil*/ 0
         } else {
             self.playersScoreDictionary[playerId] = score
             self.availableScores.enumerated().forEach { (index, value) in
@@ -117,9 +155,72 @@ extension PlayersViewController {
         }
     }
     
+    private func createFooter() {
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 80))
+        let label = UILabel(frame: footer.bounds)
+        label.textAlignment = .center
+        if let votets = playersList.last?.voters {
+            label.text = "Users voted: \(votets)"
+        }
+        label.textColor = .black
+        footer.isHidden = (voteStage == .notVoted)
+        footer.addSubview(label)
+        tableView.tableFooterView = footer
+    }
+    
+    private func showAlert(with text: String) {
+        let alert = UIAlertController(title: "Notice", message: text, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default))
+        self.present(alert, animated: true)
+    }
+    
     @objc private func voteTapped() {
-        print("Vote tapped")
-        print("результат \(pollDetails?.playersVotingType)")
+        let playesrScoresRequestModel: PlayerScoresRequestModel = .init(playerScores: playersScoreDictionary.map {
+            PlayerScores(playerId: $0.key, score: $0.value)
+        })
+        
+        var scoresCount = 0
+        playesrScoresRequestModel.playerScores.forEach {
+            if $0.score != 0 {
+                scoresCount += 1
+            }
+        }
+        
+        let playersCount = playesrScoresRequestModel.playerScores.count
+
+        if playersCount < 10 {
+            if playersCount != scoresCount {
+                showAlert(with: "Rate all players")
+                return
+            }
+        } else {
+            if scoresCount != 10 {
+                showAlert(with: "Distribute all scores")
+                return
+            }
+        }
+        
+        let jsonEncoder = JSONEncoder()
+        guard let jsonData = try? jsonEncoder.encode(playesrScoresRequestModel),
+              let json = String(data: jsonData, encoding: String.Encoding.utf8) else { return }
+        
+        print("json")
+        print(json)
+        
+        
+        APICaller.shared.votePollPlayers(
+            id: pollId,
+            playersScores: json
+        ) { [weak self ]result in
+            guard let self else { return }
+            switch result {
+            case true:
+                print("Проголосовано успешно")
+                self.fetchPoll()
+            case false:
+                print("Проголосовано НЕУСПЕШНО")
+            }
+        }
     }
 }
 
@@ -131,7 +232,6 @@ extension PlayersViewController: UITableViewDataSource {
         playersList.count
     }
     
-    
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: PlayerCell.identifier,
@@ -139,13 +239,26 @@ extension PlayersViewController: UITableViewDataSource {
         ) as? PlayerCell else {
             fatalError()
         }
+        
         let player = playersList[indexPath.row]
+        
         cell.delegate = self
-        cell.configureCell(with: player, indexPatn: indexPath)
+
+        
+        cell.configureCell(
+            with: player,
+            indexPatn: indexPath,
+            stage: voteStage
+        )
+        
         if let score = self.playersScoreDictionary[player.id] {
             cell.setScore(score)
         } else {
             cell.setScore(0)
+        }
+        
+        if voteStage == .voted {
+            cell.setResultScore(score: player.score ?? Double())
         }
         return cell
     }
@@ -156,11 +269,7 @@ extension PlayersViewController: UITableViewDataSource {
 extension PlayersViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = RateViewController()
-//        vc.modalPresentationStyle = .overFullScreen
-//        self.present(vc, animated: true)
-        
-        print("tap cell")
+        print(voteStage)
     }
 }
 
@@ -169,6 +278,7 @@ extension PlayersViewController: UITableViewDelegate {
 extension PlayersViewController: PlayerCellDelegate {
     
     func scoreTapped(_ cell: PlayerCell, indexPathRow: Int) {
+        guard voteStage == .notVoted else { return }
         let vc = RateViewController()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)

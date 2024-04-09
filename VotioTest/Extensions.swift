@@ -84,4 +84,37 @@ extension UILabel {
         }
         self.text = String(number)
     }
+    
+    func setText(with number: Double?) {
+        guard let number = number else {
+            self.text = ""
+            return
+        }
+        self.text = String(number)
+    }
+    
+    func setWithPlus(number: Double, isChangeTextColor: Bool) {
+        let text = String(number)
+        if number > 0 {
+            self.text = "" + text
+            if isChangeTextColor {
+                self.textColor = .green
+            }
+        } else {
+            if isChangeTextColor {
+                self.textColor = .red
+            }
+            self.text = text
+        }
+    }
+}
+
+extension Double {
+    
+    func reduceScale(to places: Int) -> Double {
+        let multiplier = pow(10, Double(places))
+        let newDecimal = (multiplier * self).rounded() // move the decimal right
+        let originalDecimal = newDecimal / multiplier // move the decimal back
+        return originalDecimal
+    }
 }

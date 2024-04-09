@@ -68,7 +68,6 @@ public final class PlayerCell: UITableViewCell {
         var label = UILabel()
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 20
-        label.isHidden = true
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.backgroundColor = .blue.withAlphaComponent(0.2)
@@ -82,7 +81,6 @@ public final class PlayerCell: UITableViewCell {
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 20
         label.textAlignment = .center
-        label.isHidden = false
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.backgroundColor = .blue.withAlphaComponent(0.2)
         return label
@@ -91,6 +89,7 @@ public final class PlayerCell: UITableViewCell {
     //MARK: - Variables
     
     var indexPathRow: Int?
+    var voteStage: PlayersViewController.VoteStage?
     
     //MARK: - Initialization
     
@@ -111,6 +110,7 @@ public final class PlayerCell: UITableViewCell {
         positionLabel.text = nil
         playerImageView.image = nil
         indexPathRow = nil
+        voteStage = nil
     }
 }
 
@@ -159,7 +159,29 @@ extension PlayerCell {
         }
     }
     
-    func configureCell(with player: PlayersVoting, indexPatn: IndexPath) {
+    func setResultScore(score: Double) {
+        if score < 0 {
+            plusLabel.isHidden = true
+            scoreLabel.isHidden = false
+            scoreLabel.backgroundColor = .red.withAlphaComponent(0.2)
+            scoreLabel.textColor = .red
+            scoreLabel.setText(with: score.reduceScale(to: 1))
+        } else {
+            plusLabel.isHidden = true
+            scoreLabel.isHidden = false
+            scoreLabel.backgroundColor = .blue.withAlphaComponent(0.2)
+            scoreLabel.textColor = .blue
+            scoreLabel.setWithPlus(number: score.reduceScale(to: 1),
+                                        isChangeTextColor: false)
+        }
+    }
+    
+    func configureCell(
+        with player: PlayersVoting,
+        indexPatn: IndexPath,
+        stage: PlayersViewController.VoteStage
+    ) {
+        voteStage = stage
         indexPathRow = indexPatn.row
         nameLabel.text = player.name
 

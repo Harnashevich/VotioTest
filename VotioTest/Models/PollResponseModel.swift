@@ -20,6 +20,7 @@ struct PollDetails: Codable {
     let isArchive: Int
     let playersVotingType: MatchResultsModel
     let playersVoting: [PlayersVoting]
+    let playersVotingStats: [PlayersVoting]
     let stage: Int
 }
 
@@ -28,5 +29,7 @@ struct PlayersVoting: Codable {
     let id: Int
     let name, number, amplua: String
     let photo: String
+    let score: Double?
+    let voters: Int?
 }
 
