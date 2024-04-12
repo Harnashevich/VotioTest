@@ -56,7 +56,7 @@ public class PlayersViewController: UIViewController {
 //        }
 //    }
     
-    private var playersList = [PlayersVoting]() {
+    private var playersList = [PlayerVoting]() {
         didSet {
             tableView.reloadData()
         }
@@ -269,7 +269,10 @@ extension PlayersViewController: UITableViewDataSource {
 extension PlayersViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(voteStage)
+        let player = playersList[indexPath.row]
+        let vc = PlayerDetailsViewController(playerId: player.id)
+        vc.title = player.name
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -283,17 +286,19 @@ extension PlayersViewController: PlayerCellDelegate {
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
         
-        if let playerScore = self.playersScoreDictionary[self.playersList[indexPathRow].id] {
+        if let playerScore = playersScoreDictionary[playersList[indexPathRow].id] {
             availableScores.append(playerScore)
             vc.set(selectedScore: playerScore)
         }
-        if let matchResult = self.pollDetails?.playersVotingType {
-            vc.setView(playerId: self.playersList[indexPathRow].id,
-                                    matchResult: matchResult,
-                                    availabelScores: self.availableScores)
+        if let matchResult = pollDetails?.playersVotingType {
+            vc.setView(
+                playerId: playersList[indexPathRow].id,
+                matchResult: matchResult,
+                availabelScores: self.availableScores
+            )
         }
         vc.ratePlayerClosure = { [unowned self] (id, score) in
-            self.upodateScoreForPlayer(withPlayerId: id, toScore: score)
+             upodateScoreForPlayer(withPlayerId: id, toScore: score)
         }
     }
 }

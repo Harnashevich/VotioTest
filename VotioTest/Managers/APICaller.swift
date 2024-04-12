@@ -22,7 +22,7 @@ final class APICaller {
 //            guard let uIDevice = UIDevice.current.identifierForVendor?.uuidString else {
 //                return String()
 //            }
-            return "9989r423к5"
+            return "99326238765"
         }
     }
     
@@ -129,7 +129,7 @@ extension APICaller {
             path: Endpoints.votePollPlayers,
             method: .post,
             parameters: [
-                "id": id,
+                "id": "\(id)",
                 "votes": playersScores
             ],
             headers: [
@@ -158,9 +158,6 @@ extension APICaller {
         headers: HTTPHeaders? = nil,
         completion: @escaping ((Result<T, Error>)) -> Void
     ) {
-        
-        print("UUID")
-        print(Constents.uIDevice)
         AF.request(
             Constents.baseURL + path,
             method: method,

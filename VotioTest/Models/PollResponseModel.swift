@@ -19,13 +19,13 @@ struct PollDetails: Codable {
     let title, type, dateStart, dateEnd: String
     let isArchive: Int
     let playersVotingType: MatchResultsModel
-    let playersVoting: [PlayersVoting]
-    let playersVotingStats: [PlayersVoting]
+    let playersVoting: [PlayerVoting]
+    let playersVotingStats: [PlayerVoting]
     let stage: Int
 }
 
 // MARK: - PlayersVoting
-struct PlayersVoting: Codable {
+struct PlayerVoting: Codable {
     let id: Int
     let name, number, amplua: String
     let photo: String

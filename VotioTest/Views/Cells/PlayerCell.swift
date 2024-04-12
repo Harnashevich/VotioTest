@@ -47,7 +47,6 @@ public final class PlayerCell: UITableViewCell {
     private lazy var positionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
-//        label.backgroundColor = .red.withAlphaComponent(0.1)
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textAlignment = .left
         label.layer.cornerRadius = 4
@@ -177,7 +176,7 @@ extension PlayerCell {
     }
     
     func configureCell(
-        with player: PlayersVoting,
+        with player: PlayerVoting,
         indexPatn: IndexPath,
         stage: PlayersViewController.VoteStage
     ) {
