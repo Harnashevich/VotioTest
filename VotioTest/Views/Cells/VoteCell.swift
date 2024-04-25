@@ -93,7 +93,7 @@ extension VoteCell {
     }
     
     func configureCell(with poll: Poll) {
-        titleLabel.text = "\(poll.playersVotingType) id \(poll.id) " + poll.title
+        titleLabel.text = poll.title
         let pollDate = "\(poll.dateStart.currentFormatt) - \(poll.dateEnd.currentFormatt)"
         dateLabel.text = (poll.isArchive == 0) ? pollDate : "Finished"
     }

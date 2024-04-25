@@ -127,5 +127,4 @@ extension PlayerDataView {
             footLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
-}
-
+} 

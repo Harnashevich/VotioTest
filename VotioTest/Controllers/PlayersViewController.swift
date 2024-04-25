@@ -32,10 +32,11 @@ public class PlayersViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 22)
         button.layer.cornerRadius = 8
+        button.isHidden = true
         button.addTarget(self, action: #selector(voteTapped), for: .touchUpInside)
         return button
     }()
-    
+     
     //MARK: - Enum
     
     enum VoteStage {
@@ -86,7 +87,10 @@ public class PlayersViewController: UIViewController {
     }
     
     public override func viewDidAppear(_ animated: Bool) {
-        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)]
+        let attributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .black),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
         UINavigationBar.appearance().titleTextAttributes = attributes
     }
 }
@@ -106,6 +110,7 @@ extension PlayersViewController {
                     case 1:
                         self.voteStage = .notVoted
                         self.playersList = data.result.playersVoting
+                        self.voteButton.isHidden = false
                     case 2:
                         self.voteStage = .voted
                         self.playersList = data.result.playersVotingStats
@@ -272,7 +277,10 @@ extension PlayersViewController: UITableViewDelegate {
         let player = playersList[indexPath.row]
         let vc = PlayerDetailsViewController(playerId: player.id)
         vc.title = player.name
-        navigationController?.pushViewController(vc, animated: true)
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
 }
 

@@ -75,6 +75,7 @@ public final class PlayerDetailsViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubviews(stackView)
+        setUpCloseButton()
         stackView.addArrangedSubviews(
             playerImageView,
             playerDataView,
@@ -98,7 +99,6 @@ extension PlayerDetailsViewController {
                 switch result {
                 case .success(let data):
                     self.player = data.result
-                    print(self.player)
                     if let player = self.player {
                         self.playerImageView.sd_setImage(
                             with: URL(string: self.player?.photo ?? String()),
@@ -112,6 +112,20 @@ extension PlayerDetailsViewController {
                 }
             }
         }
+    }
+    
+    /// Sets up close button
+    private func setUpCloseButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: self,
+            action: #selector(didTapClose)
+        )
+    }
+    
+    /// Handle close button tap
+    @objc private func didTapClose() {
+        dismiss(animated: true, completion: nil)
     }
 }
 

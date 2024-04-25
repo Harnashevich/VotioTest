@@ -29,14 +29,14 @@ public final class RatingView: UIView {
     private lazy var minusView: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 4
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .white  
         return view
     }()
     
     private lazy var plusView: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 4
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .white
         return view
     }()
     

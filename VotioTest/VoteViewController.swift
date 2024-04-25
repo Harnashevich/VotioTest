@@ -90,7 +90,7 @@ extension VoteViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = PlayersViewController(pollId: polls[indexPath.row].id)
-        vc.title = "Player voting"
+        vc.title = polls[indexPath.row].title
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

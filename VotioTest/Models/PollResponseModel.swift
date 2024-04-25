@@ -32,4 +32,3 @@ struct PlayerVoting: Codable {
     let score: Double?
     let voters: Int?
 }
-
