@@ -10,6 +10,10 @@
 		9F1C04F42BC698440010CE43 /* PlayerDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C04F32BC698440010CE43 /* PlayerDataView.swift */; };
 		9F1C04F62BC6B2E70010CE43 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C04F52BC6B2E70010CE43 /* RatingView.swift */; };
 		9F1C04F82BC6C9EE0010CE43 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C04F72BC6C9ED0010CE43 /* StatsView.swift */; };
+		9F30D5262BE254E000323A2D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9F30D5252BE254E000323A2D /* Alamofire */; };
+		9F30D5282BE254E000323A2D /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9F30D5272BE254E000323A2D /* AlamofireDynamic */; };
+		9F30D52B2BE254EE00323A2D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9F30D52A2BE254EE00323A2D /* SDWebImage */; };
+		9F30D52D2BE254EE00323A2D /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F30D52C2BE254EE00323A2D /* SDWebImageMapKit */; };
 		9F48B4C72BB5AA7700631BC0 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */; };
 		9F48B4C92BB5AC1400631BC0 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4C82BB5AC1400631BC0 /* PlayerCell.swift */; };
 		9F48B4CB2BB5B98200631BC0 /* RatePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */; };
@@ -22,10 +26,6 @@
 		9F6297122BB30325005F9E77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6297102BB30325005F9E77 /* LaunchScreen.storyboard */; };
 		9F6FC8DC2BBEB0E100DA3E3F /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */; };
 		9F6FC8DE2BBEB14E00DA3E3F /* HelloResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8DD2BBEB14E00DA3E3F /* HelloResponseModel.swift */; };
-		9F6FC8E12BBEB69900DA3E3F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E02BBEB69900DA3E3F /* Alamofire */; };
-		9F6FC8E32BBEB69900DA3E3F /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E22BBEB69900DA3E3F /* AlamofireDynamic */; };
-		9F6FC8E62BBEB6D700DA3E3F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E52BBEB6D700DA3E3F /* SDWebImage */; };
-		9F6FC8E82BBEB6D700DA3E3F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F6FC8E72BBEB6D700DA3E3F /* SDWebImageMapKit */; };
 		9F6FC8EA2BBEC8D300DA3E3F /* PollsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */; };
 		9F6FC8EC2BBECE9800DA3E3F /* PollResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8EB2BBECE9800DA3E3F /* PollResponseModel.swift */; };
 		9F6FC8EE2BBED09F00DA3E3F /* PlayerResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8ED2BBED09F00DA3E3F /* PlayerResponseModel.swift */; };
@@ -71,10 +71,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F6FC8E62BBEB6D700DA3E3F /* SDWebImage in Frameworks */,
-				9F6FC8E12BBEB69900DA3E3F /* Alamofire in Frameworks */,
-				9F6FC8E82BBEB6D700DA3E3F /* SDWebImageMapKit in Frameworks */,
-				9F6FC8E32BBEB69900DA3E3F /* AlamofireDynamic in Frameworks */,
+				9F30D52B2BE254EE00323A2D /* SDWebImage in Frameworks */,
+				9F30D5262BE254E000323A2D /* Alamofire in Frameworks */,
+				9F30D52D2BE254EE00323A2D /* SDWebImageMapKit in Frameworks */,
+				9F30D5282BE254E000323A2D /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,10 +202,10 @@
 			);
 			name = VotioTest;
 			packageProductDependencies = (
-				9F6FC8E02BBEB69900DA3E3F /* Alamofire */,
-				9F6FC8E22BBEB69900DA3E3F /* AlamofireDynamic */,
-				9F6FC8E52BBEB6D700DA3E3F /* SDWebImage */,
-				9F6FC8E72BBEB6D700DA3E3F /* SDWebImageMapKit */,
+				9F30D5252BE254E000323A2D /* Alamofire */,
+				9F30D5272BE254E000323A2D /* AlamofireDynamic */,
+				9F30D52A2BE254EE00323A2D /* SDWebImage */,
+				9F30D52C2BE254EE00323A2D /* SDWebImageMapKit */,
 			);
 			productName = VotioTest;
 			productReference = 9F6297022BB30323005F9E77 /* VotioTest.app */;
@@ -236,8 +236,8 @@
 			);
 			mainGroup = 9F6296F92BB30323005F9E77;
 			packageReferences = (
-				9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */,
-				9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				9F30D5242BE254E000323A2D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 9F6297032BB30323005F9E77 /* Products */;
 			projectDirPath = "";
@@ -356,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -413,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -497,7 +497,7 @@
 				9F6297152BB30325005F9E77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		9F6297162BB30325005F9E77 /* Build configuration list for PBXNativeTarget "VotioTest" */ = {
 			isa = XCConfigurationList;
@@ -506,12 +506,12 @@
 				9F6297182BB30325005F9E77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		9F30D5242BE254E000323A2D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -519,7 +519,7 @@
 				minimumVersion = 5.9.1;
 			};
 		};
-		9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -530,24 +530,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9F6FC8E02BBEB69900DA3E3F /* Alamofire */ = {
+		9F30D5252BE254E000323A2D /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 9F30D5242BE254E000323A2D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		9F6FC8E22BBEB69900DA3E3F /* AlamofireDynamic */ = {
+		9F30D5272BE254E000323A2D /* AlamofireDynamic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9F6FC8DF2BBEB69900DA3E3F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 9F30D5242BE254E000323A2D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = AlamofireDynamic;
 		};
-		9F6FC8E52BBEB6D700DA3E3F /* SDWebImage */ = {
+		9F30D52A2BE254EE00323A2D /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		9F6FC8E72BBEB6D700DA3E3F /* SDWebImageMapKit */ = {
+		9F30D52C2BE254EE00323A2D /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9F6FC8E42BBEB6D700DA3E3F /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

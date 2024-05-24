@@ -16,6 +16,7 @@ struct PollsResponseModel: Codable {
 // MARK: - Result
 struct Poll: Codable {
     let id: Int
+    let subtitle: String
     let title, type, dateStart, dateEnd: String
     var isArchive: Int
     let playersVotingType: MatchResultsModel

@@ -58,7 +58,7 @@ extension String {
         
         let convertDateFormatter = DateFormatter()
         convertDateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        convertDateFormatter.dateFormat = "d MMMM HH:mm"
+        convertDateFormatter.dateFormat = "d MMMM YYYY"
         
         return convertDateFormatter.string(from: oldDate ?? Date())
     }

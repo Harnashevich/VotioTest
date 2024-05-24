@@ -12,52 +12,75 @@ public final class VoteCell: UITableViewCell {
     static let identifier = String(describing: VoteCell.self)
     
     //MARK: - UI
-    
-    private lazy var voteView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 16
-        view.backgroundColor = .link.withAlphaComponent(0.15)
-        return view
-    }()
-    
-    private lazy var titleView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 16
-        view.backgroundColor = .white
-        view.clipsToBounds = true
-        return view
+
+    private lazy var xImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "multiply")
+        image.contentMode = .scaleAspectFill
+        image.tintColor = .white
+        return image
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 20, weight: .medium)
-        label.backgroundColor = .clear
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var firstTeamLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textAlignment = .right
+        return label
+    }()
+    
+    private lazy var secondTeamLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var leageLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .light)
         label.textAlignment = .center
         return label
     }()
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        return label
+    }()
+    
+    private lazy var voteLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .white
         label.textColor = .blue
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 4
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.backgroundColor = .blue.withAlphaComponent(0.1)
+        label.text = "Vote"
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var ballImageView: UIImageView = {
+    private lazy var backgroundImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "VotioLogo")
+        image.image = UIImage(named: "voteBackgroundView")
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 16
         return image
     }()
     
     private lazy var calendarImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "calendar")
+        image.image = UIImage(named: "calendarBlackIcon")
         image.tintColor = .blue
         return image
     }()
@@ -77,7 +100,11 @@ public final class VoteCell: UITableViewCell {
     }
     
     public override func prepareForReuse() {
+        firstTeamLabel.text = nil
+        secondTeamLabel.text = nil
         titleLabel.text = nil
+        leageLabel.text = nil
+        xImageView.isHidden = true
         dateLabel.text = nil
     }
 }
@@ -87,14 +114,39 @@ public final class VoteCell: UITableViewCell {
 extension VoteCell {
     
     private func configureUI() {
-        addBorderColor(voteView, titleView)
-        contentView.addSubviews(voteView, titleView, dateLabel, calendarImageView)
-        titleView.addSubviews(ballImageView, titleLabel)
+        contentView.addSubviews(
+            dateLabel,
+            calendarImageView,
+            backgroundImageView,
+            xImageView,
+            firstTeamLabel,
+            secondTeamLabel,
+            titleLabel,
+            leageLabel
+        )
+        backgroundImageView.addSubview(voteLabel)
     }
     
     func configureCell(with poll: Poll) {
-        titleLabel.text = poll.title
-        let pollDate = "\(poll.dateStart.currentFormatt) - \(poll.dateEnd.currentFormatt)"
+//        titleLabel.text = poll.title
+        
+        let matchTeamsArray = poll.title.components(separatedBy: " x ")
+        if matchTeamsArray.count == 2 {
+            let firstTeam = matchTeamsArray[0]
+            let secondTeam = matchTeamsArray[1]
+            
+            xImageView.isHidden = false
+            
+            firstTeamLabel.text = firstTeam
+            secondTeamLabel.text = secondTeam
+        } else {
+            xImageView.isHidden = true
+            titleLabel.text = poll.title
+        }
+        
+        leageLabel.text = poll.subtitle
+        
+        let pollDate = "\(poll.dateStart.currentFormatt)"
         dateLabel.text = (poll.isArchive == 0) ? pollDate : "Finished"
     }
 }
@@ -105,31 +157,45 @@ extension VoteCell {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            voteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            voteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            voteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            voteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-
-            titleView.topAnchor.constraint(equalTo: voteView.topAnchor),
-            titleView.leadingAnchor.constraint(equalTo: voteView.leadingAnchor),
-            titleView.trailingAnchor.constraint(equalTo: voteView.trailingAnchor),
-            titleView.bottomAnchor.constraint(equalTo: voteView.bottomAnchor, constant: -50),
+            dateLabel.centerYAnchor.constraint(equalTo: calendarImageView.centerYAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: calendarImageView.trailingAnchor, constant: 10),
             
-            titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -20),
-            titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -20),
+            calendarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            calendarImageView.topAnchor.constraint(equalTo: topAnchor),
+            calendarImageView.heightAnchor.constraint(equalToConstant: 20),
+            calendarImageView.widthAnchor.constraint(equalToConstant: 20),
             
-            dateLabel.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20),
-            dateLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            backgroundImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+            backgroundImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            backgroundImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            backgroundImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
-            calendarImageView.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10),
-            calendarImageView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
+            xImageView.heightAnchor.constraint(equalToConstant: 12),
+            xImageView.widthAnchor.constraint(equalToConstant: 12),
+            xImageView.topAnchor.constraint(equalTo: backgroundImageView.topAnchor, constant: 25),
+            xImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            ballImageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-            ballImageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
-            ballImageView.widthAnchor.constraint(equalToConstant: 100),
-            ballImageView.heightAnchor.constraint(equalToConstant: 100)
+            firstTeamLabel.centerYAnchor.constraint(equalTo: xImageView.centerYAnchor),
+            firstTeamLabel.trailingAnchor.constraint(equalTo: xImageView.leadingAnchor, constant: -10),
+            firstTeamLabel.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor, constant: 10),
+            
+            secondTeamLabel.centerYAnchor.constraint(equalTo: xImageView.centerYAnchor),
+            secondTeamLabel.leadingAnchor.constraint(equalTo: xImageView.trailingAnchor, constant: 10),
+            secondTeamLabel.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor, constant: -10),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.centerYAnchor.constraint(equalTo: xImageView.centerYAnchor),
+            
+            leageLabel.topAnchor.constraint(equalTo: xImageView.bottomAnchor, constant: 20),
+            leageLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            leageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            leageLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            voteLabel.topAnchor.constraint(equalTo: leageLabel.bottomAnchor, constant: 10),
+            voteLabel.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor),
+            voteLabel.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor),
+            voteLabel.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor)
         ])
     }
 }

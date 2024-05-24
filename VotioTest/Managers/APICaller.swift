@@ -156,7 +156,7 @@ extension APICaller {
         method: HTTPMethod,
         parameters: Parameters? = nil,
         headers: HTTPHeaders? = nil,
-        completion: @escaping ((Result<T, Error>)) -> Void
+        completion: @escaping (Result<T, Error>) -> Void
     ) {
         AF.request(
             Constents.baseURL + path,

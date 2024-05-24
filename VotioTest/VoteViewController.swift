@@ -11,15 +11,41 @@ public final class VoteViewController: UIViewController {
     
     //MARK: - UI
     
+    private lazy var topView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
+        lazy var title = UILabel()
+        title.text = "Voting list"
+        title.textColor = .black
+        title.font = .systemFont(ofSize: 18, weight: .bold)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(title)
+        title.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        title.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
+        
+        return view
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+//        tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 50, right: 0)
         tableView.register(
             VoteCell.self,
             forCellReuseIdentifier: VoteCell.identifier
         )
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .blue.withAlphaComponent(0.03)
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -32,14 +58,12 @@ public final class VoteViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Voting list"
         view.backgroundColor = .white
-        view.addSubview(tableView)
+        view.addSubviews(tableView, topView)
+        print(view.frame.size.width)
+        navigationController?.navigationBar.isHidden = true
         setConstraints()
         fetchPolls()
-        
-        // set font for title
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
 }
 
@@ -93,6 +117,10 @@ extension VoteViewController: UITableViewDelegate {
         vc.title = polls[indexPath.row].title
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        190
+    }
 }
 
 //MARK: - Layout
@@ -101,7 +129,12 @@ extension VoteViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            topView.topAnchor.constraint(equalTo: view.topAnchor),
+            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
+            
+            tableView.topAnchor.constraint(equalTo: topView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
