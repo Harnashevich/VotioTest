@@ -21,6 +21,9 @@ public final class StatsView: UIView {
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 10
+        stack.backgroundColor = .white
+        stack.layer.cornerRadius = 10
+        stack.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return stack
     }()
     
@@ -29,6 +32,10 @@ public final class StatsView: UIView {
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 10
+        stack.layer.masksToBounds = true
+        stack.backgroundColor = .white
+        stack.layer.cornerRadius = 10
+        stack.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return stack
     }()
     
@@ -42,7 +49,8 @@ public final class StatsView: UIView {
     
     private var cardsModel: [StatsModel] = [
         .init(stats: "Yellow Cards", count: Int.random(in: 0...10)),
-        .init(stats: "Red Cards", count: Int.random(in: 0...5))
+        .init(stats: "Red Cards", count: Int.random(in: 0...5)),
+        .init(stats: "Seasons", count: Int.random(in: 1...12))
     ]
     
     //MARK: - Initialization
@@ -69,18 +77,17 @@ extension StatsView {
             let view = UIView()
             view.layer.cornerRadius = 8
             topStack.addArrangedSubviews(view)
-            addBorderColor(view)
             
             let countLabel = UILabel()
             countLabel.text = "\(stats.count)"
             countLabel.font = .systemFont(ofSize: 25, weight: .heavy)
-            countLabel.textColor = .blue
+            countLabel.textColor = .darkGray
             countLabel.textAlignment = .center
             view.addSubview(countLabel)
             
             let titleLabel = UILabel()
-            titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
-            titleLabel.textColor = .black
+            titleLabel.font = .systemFont(ofSize: 15, weight: .regular)
+            titleLabel.textColor = .darkGray
             titleLabel.textAlignment = .center
             titleLabel.text = stats.stats
             view.addSubview(titleLabel)
@@ -100,18 +107,28 @@ extension StatsView {
             let view = UIView()
             view.layer.cornerRadius = 8
             bottomStack.addArrangedSubviews(view)
-            addBorderColor(view)
             
             let countLabel = UILabel()
             countLabel.text = "\(card.count)"
             countLabel.font = .systemFont(ofSize: 25, weight: .heavy)
-            countLabel.textColor = (card.stats == "Yellow Cards") ? .systemYellow : .red
+            
+            switch card.stats {
+            case "Red Cards":
+                countLabel.textColor = .red
+            case "Yellow Cards":
+                countLabel.textColor = .systemYellow
+            case "Seasons":
+                countLabel.textColor = .purple.withAlphaComponent(0.5)
+            default:
+                break
+            }
+            
             countLabel.textAlignment = .center
             view.addSubview(countLabel)
             
             let titleLabel = UILabel()
-            titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
-            titleLabel.textColor = .black
+            titleLabel.font = .systemFont(ofSize: 15, weight: .regular)
+            titleLabel.textColor = .darkGray
             titleLabel.textAlignment = .center
             titleLabel.text = card.stats
             view.addSubview(titleLabel)
@@ -135,12 +152,12 @@ extension StatsView {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            topStack.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            topStack.topAnchor.constraint(equalTo: topAnchor),
             topStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             topStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             topStack.heightAnchor.constraint(equalToConstant: 80),
             
-            bottomStack.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 10),
+            bottomStack.topAnchor.constraint(equalTo: topStack.bottomAnchor),
             bottomStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             bottomStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),

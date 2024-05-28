@@ -15,15 +15,15 @@ public final class MastershipCell: UITableViewCell {
     
     private lazy var mastershipLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     
     private lazy var countLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 15, weight: .heavy)
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     

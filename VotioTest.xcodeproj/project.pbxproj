@@ -17,8 +17,10 @@
 		9F48B4C72BB5AA7700631BC0 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */; };
 		9F48B4C92BB5AC1400631BC0 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4C82BB5AC1400631BC0 /* PlayerCell.swift */; };
 		9F48B4CB2BB5B98200631BC0 /* RatePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */; };
+		9F4F4B722C04D51400535BCB /* PlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4F4B712C04D51400535BCB /* PlayerImageView.swift */; };
 		9F4F59872BC821CE00C152FE /* MastershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4F59862BC821CE00C152FE /* MastershipView.swift */; };
 		9F4F59892BC825E000C152FE /* MastershipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4F59882BC825E000C152FE /* MastershipCell.swift */; };
+		9F540B2F2C00B866008CD33D /* VoteHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540B2E2C00B866008CD33D /* VoteHeaderView.swift */; };
 		9F6297062BB30323005F9E77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297052BB30323005F9E77 /* AppDelegate.swift */; };
 		9F6297082BB30323005F9E77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297072BB30323005F9E77 /* SceneDelegate.swift */; };
 		9F62970A2BB30323005F9E77 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297092BB30323005F9E77 /* VoteViewController.swift */; };
@@ -44,8 +46,10 @@
 		9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		9F48B4C82BB5AC1400631BC0 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatePlayerViewController.swift; sourceTree = "<group>"; };
+		9F4F4B712C04D51400535BCB /* PlayerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerImageView.swift; sourceTree = "<group>"; };
 		9F4F59862BC821CE00C152FE /* MastershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastershipView.swift; sourceTree = "<group>"; };
 		9F4F59882BC825E000C152FE /* MastershipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastershipCell.swift; sourceTree = "<group>"; };
+		9F540B2E2C00B866008CD33D /* VoteHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteHeaderView.swift; sourceTree = "<group>"; };
 		9F6297022BB30323005F9E77 /* VotioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VotioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6297052BB30323005F9E77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F6297072BB30323005F9E77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,10 +98,12 @@
 		9F1C04F22BC693B90010CE43 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F4F4B712C04D51400535BCB /* PlayerImageView.swift */,
 				9F1C04F32BC698440010CE43 /* PlayerDataView.swift */,
 				9F1C04F52BC6B2E70010CE43 /* RatingView.swift */,
 				9F1C04F72BC6C9ED0010CE43 /* StatsView.swift */,
 				9F4F59862BC821CE00C152FE /* MastershipView.swift */,
+				9F540B2E2C00B866008CD33D /* VoteHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 				9F8D99942BB4536300A0BB0A /* Extensions.swift in Sources */,
 				9F48B4CB2BB5B98200631BC0 /* RatePlayerViewController.swift in Sources */,
 				9F4F59872BC821CE00C152FE /* MastershipView.swift in Sources */,
+				9F540B2F2C00B866008CD33D /* VoteHeaderView.swift in Sources */,
 				9F62970A2BB30323005F9E77 /* VoteViewController.swift in Sources */,
 				9F6FC8DE2BBEB14E00DA3E3F /* HelloResponseModel.swift in Sources */,
 				9F6FC8F32BC0074A00DA3E3F /* MatchResultsModel.swift in Sources */,
@@ -283,6 +290,7 @@
 				9F4F59892BC825E000C152FE /* MastershipCell.swift in Sources */,
 				9F8D99922BB4530400A0BB0A /* VoteCell.swift in Sources */,
 				9F6FC8F52BC3E6D900DA3E3F /* PlayerScoresRequestModel.swift in Sources */,
+				9F4F4B722C04D51400535BCB /* PlayerImageView.swift in Sources */,
 				9F1C04F82BC6C9EE0010CE43 /* StatsView.swift in Sources */,
 				9F6FC8F72BC3ECD800DA3E3F /* SimpleResponseModel.swift in Sources */,
 				9F48B4C72BB5AA7700631BC0 /* PlayersViewController.swift in Sources */,

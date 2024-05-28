@@ -31,12 +31,19 @@ public final class MastershipView: UIView {
     
     //MARK: - UI
     
+    private lazy var mastershipView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.textAlignment = .left
-        label.text = "Mastership rating"
+        label.text = "Player parametrs"
         return label
     }()
     
@@ -58,11 +65,13 @@ public final class MastershipView: UIView {
     //MARK: - Variables
     
     private var mastership: [Mastership] = [
-        .init(title: "Speed", rating: Int.random(in: 0...100)),
-        .init(title: "Dexterity", rating: Int.random(in: 0...100)),
-        .init(title: "Force", rating: Int.random(in: 0...100)),
+        .init(title: "Readiness", rating: Int.random(in: 0...100)),
+        .init(title: "Motivation", rating: Int.random(in: 0...100)),
         .init(title: "Health", rating: Int.random(in: 0...100)),
-        .init(title: "Readiness", rating: Int.random(in: 0...100))
+        .init(title: "Fitness", rating: Int.random(in: 0...100)),
+        .init(title: "Psychology", rating: Int.random(in: 0...100)),
+        .init(title: "P.T.", rating: Int.random(in: 0...100)),
+        .init(title: "Mastership rating", rating: Int.random(in: 0...100))
     ]
     
     //MARK: - Initialization
@@ -83,7 +92,8 @@ public final class MastershipView: UIView {
 extension MastershipView {
     
     private func configureUI() {
-        addSubviews(titleLabel, tableView)
+        addSubviews(mastershipView, titleLabel, tableView)
+        mastershipView.addSubviews(titleLabel, tableView)
     }
 }
 
@@ -122,14 +132,19 @@ extension MastershipView {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            mastershipView.topAnchor.constraint(equalTo: topAnchor),
+            mastershipView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            mastershipView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            mastershipView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            tableView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            titleLabel.topAnchor.constraint(equalTo: mastershipView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: mastershipView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: mastershipView.trailingAnchor, constant: -20),
+            
+            tableView.topAnchor.constraint(equalTo: mastershipView.topAnchor, constant: 50),
+            tableView.leadingAnchor.constraint(equalTo: mastershipView.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: mastershipView.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: mastershipView.bottomAnchor, constant: -20)
         ])
     }
 }

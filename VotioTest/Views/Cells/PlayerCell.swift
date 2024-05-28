@@ -12,7 +12,7 @@ protocol PlayerCellDelegate: AnyObject {
     func scoreTapped(_ cell: PlayerCell, indexPathRow: Int)
 }
 
-public final class PlayerCell: UITableViewCell {
+public final class PlayerCell: UICollectionViewCell {
     
     static let identifier = String(describing: PlayerCell.self)
     
@@ -20,11 +20,12 @@ public final class PlayerCell: UITableViewCell {
     
     //MARK: - UI
     
-    private lazy var playerView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 16
-        view.backgroundColor = .white
-        return view
+    private lazy var playerBackgroundImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "playerBackgroundView")
+        image.layer.cornerRadius = 10
+        image.layer.masksToBounds = true
+        return image
     }()
     
     private lazy var playerImageView: UIImageView = {
@@ -32,22 +33,41 @@ public final class PlayerCell: UITableViewCell {
         image.tintColor = .lightGray.withAlphaComponent(0.5)
         image.layer.cornerRadius = 8
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFit
         return image
     }()
+    
+    private lazy var numberLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var secondNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 18, weight: .black)
+        label.textAlignment = .left
+        label.text = "Messi"
+        return label
+    }()
+
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textAlignment = .left
-        label.text = "Lionel Messi"
+        label.text = "Lionel"
         return label
     }()
     
     private lazy var positionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .red
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textAlignment = .left
         label.layer.cornerRadius = 4
         label.layer.masksToBounds = true
@@ -57,31 +77,44 @@ public final class PlayerCell: UITableViewCell {
     
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .horizontal
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.scoreTapped))
+        stack.axis = .vertical
+        stack.backgroundColor = .white
+        stack.layer.cornerRadius = 10
+        stack.clipsToBounds = true
+        stack.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.scoreTapped))
         stack.addGestureRecognizer(gesture)
         return stack
     }()
     
     private var scoreLabel: UILabel = {
         var label = UILabel()
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 20
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
-        label.backgroundColor = .blue.withAlphaComponent(0.2)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
-    private var plusLabel: UILabel = {
+    private var rateView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private var yourRateLabel: UILabel = {
         var label = UILabel()
-        label.text = "+"
+        label.text = "Your rate"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        return label
+    }()
+    
+    private var voteLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Vote"
         label.textColor = .blue
+        label.backgroundColor = .white
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 20
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.backgroundColor = .blue.withAlphaComponent(0.2)
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
     
@@ -92,24 +125,24 @@ public final class PlayerCell: UITableViewCell {
     
     //MARK: - Initialization
     
-    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        backgroundColor = .clear
+    override init(frame: CGRect){
+        super.init(frame: frame)
         configureUI()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     public override func prepareForReuse() {
+        secondNameLabel.text = nil
         nameLabel.text = nil
         positionLabel.text = nil
         playerImageView.image = nil
         indexPathRow = nil
         voteStage = nil
+        numberLabel.text = nil
     }
 }
 
@@ -126,49 +159,47 @@ extension PlayerCell {
     
     private func configureUI() {
         contentView.addSubviews(
-            playerView,
+            playerBackgroundImageView,
             playerImageView,
+            stackView,
+            numberLabel,
             nameLabel,
-            positionLabel,
-            stackView
+            secondNameLabel,
+            positionLabel
         )
-        stackView.addArrangedSubviews(scoreLabel, plusLabel)
-        
-        addBorderColor(playerView, playerImageView)
+        stackView.addArrangedSubviews(rateView, voteLabel)
+        rateView.addSubviews(yourRateLabel, scoreLabel)
     }
     
     //MARK: - Public
     
     func setScore(_ score: Int) {
         if score == 0 {
-            plusLabel.isHidden = false
-            scoreLabel.isHidden = true
+            voteLabel.isHidden = false
+            rateView.isHidden = true
         } else if score < 0 {
-            plusLabel.isHidden = true
-            scoreLabel.isHidden = false
-            scoreLabel.backgroundColor = .red.withAlphaComponent(0.2)
+            voteLabel.isHidden = true
+            rateView.isHidden = false
             scoreLabel.textColor = .red
             scoreLabel.setText(with: score)
         } else {
-            plusLabel.isHidden = true
-            scoreLabel.isHidden = false
-            scoreLabel.backgroundColor = .blue.withAlphaComponent(0.2)
+            voteLabel.isHidden = true
+            rateView.isHidden = false
             scoreLabel.textColor = .blue
             scoreLabel.text = "\(score)"
         }
     }
     
     func setResultScore(score: Double) {
+        yourRateLabel.text = "User rating"
         if score < 0 {
-            plusLabel.isHidden = true
-            scoreLabel.isHidden = false
-            scoreLabel.backgroundColor = .red.withAlphaComponent(0.2)
+            voteLabel.isHidden = true
+            rateView.isHidden = false
             scoreLabel.textColor = .red
             scoreLabel.setText(with: score.reduceScale(to: 1))
         } else {
-            plusLabel.isHidden = true
-            scoreLabel.isHidden = false
-            scoreLabel.backgroundColor = .blue.withAlphaComponent(0.2)
+            voteLabel.isHidden = true
+            rateView.isHidden = false
             scoreLabel.textColor = .blue
             scoreLabel.setWithPlus(number: score.reduceScale(to: 1),
                                         isChangeTextColor: false)
@@ -182,22 +213,16 @@ extension PlayerCell {
     ) {
         voteStage = stage
         indexPathRow = indexPatn.row
-        nameLabel.text = player.name
-
-        let attrString = NSMutableAttributedString(string: player.number + " " + player.amplua)
-        attrString.addAttributes(
-            [
-                .font: UIFont.systemFont(ofSize: 15, weight: .bold),
-                .foregroundColor: UIColor.black
-            ],
-            range: NSRange(location: 0, length: player.number.count)
-        )
+        numberLabel.text = player.number
         
-        positionLabel.attributedText = attrString
-        playerImageView.sd_setImage(
-            with: URL(string: player.photo),
-            placeholderImage: UIImage(systemName: "soccerball")
-        )
+        let fullNameArray = player.name.components(separatedBy: " ")
+        if fullNameArray.count >= 2 {
+            nameLabel.text = fullNameArray[0]
+            secondNameLabel.text = fullNameArray[1]
+        }
+        
+        positionLabel.text = player.amplua
+        playerImageView.sd_setImage(with: URL(string: player.photo))
     }
 }
 
@@ -207,33 +232,40 @@ extension PlayerCell {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            playerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            playerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            playerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            playerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            playerBackgroundImageView.topAnchor.constraint(equalTo: topAnchor),
+            playerBackgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            playerBackgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            playerBackgroundImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
             
-            playerImageView.leadingAnchor.constraint(equalTo: playerView.leadingAnchor, constant: 10),
-            playerImageView.topAnchor.constraint(equalTo: playerView.topAnchor, constant: 10),
-            playerImageView.bottomAnchor.constraint(equalTo: playerView.bottomAnchor, constant: -10),
-            playerImageView.heightAnchor.constraint(equalToConstant: 50),
-            playerImageView.widthAnchor.constraint(equalToConstant: 50),
+            playerImageView.topAnchor.constraint(equalTo: topAnchor),
+            playerImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            playerImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            playerImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
             
-            nameLabel.topAnchor.constraint(equalTo: playerImageView.topAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: 20),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: playerView.trailingAnchor, constant: -100),
+            stackView.leadingAnchor.constraint(equalTo: playerBackgroundImageView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: playerBackgroundImageView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: playerBackgroundImageView.bottomAnchor),
             
-            positionLabel.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: 20),
-            positionLabel.bottomAnchor.constraint(equalTo: playerImageView.bottomAnchor),
-            positionLabel.trailingAnchor.constraint(lessThanOrEqualTo: playerView.trailingAnchor, constant: -100),
+            voteLabel.heightAnchor.constraint(equalToConstant: 40),
+            rateView.heightAnchor.constraint(equalToConstant: 40),
             
-            stackView.trailingAnchor.constraint(equalTo: playerView.trailingAnchor, constant: -20),
-            stackView.centerYAnchor.constraint(equalTo: playerView.centerYAnchor),
+            yourRateLabel.leadingAnchor.constraint(equalTo: rateView.leadingAnchor, constant: 10),
+            yourRateLabel.centerYAnchor.constraint(equalTo: rateView.centerYAnchor),
             
-            scoreLabel.heightAnchor.constraint(equalToConstant: 40),
-            scoreLabel.widthAnchor.constraint(equalToConstant: 40),
+            scoreLabel.trailingAnchor.constraint(equalTo: rateView.trailingAnchor, constant: -10),
+            scoreLabel.centerYAnchor.constraint(equalTo: rateView.centerYAnchor),
             
-            plusLabel.heightAnchor.constraint(equalToConstant: 40),
-            plusLabel.widthAnchor.constraint(equalToConstant: 40)
+            numberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            numberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            
+            secondNameLabel.topAnchor.constraint(equalTo: playerBackgroundImageView.bottomAnchor),
+            secondNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            
+            nameLabel.topAnchor.constraint(equalTo: secondNameLabel.bottomAnchor, constant: 2),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            
+            positionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2),
+            positionLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
     }
 }

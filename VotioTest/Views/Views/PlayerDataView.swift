@@ -11,61 +11,49 @@ public final class PlayerDataView: UIView {
     
     //MARK: - UI
     
-    private lazy var ampluaLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.backgroundColor = .blue.withAlphaComponent(0.2)
-        label.textColor = .blue
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 25
-        return label
+    private lazy var stackView: UIStackView = {
+        var stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
     }()
-    
+
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "🗓️ 10.03.1999"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.text = "10/03/1999"
+        label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 22
+        label.layer.cornerRadius = 10
+        label.backgroundColor = .white
         return label
     }()
     
     private lazy var weightLabel: UILabel = {
         let label = UILabel()
-        label.text = "👤 182cm/75kg"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.text = "182cm/75kg"
+        label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 22
+        label.layer.cornerRadius = 10
+        label.backgroundColor = .white
         return label
     }()
     
     private lazy var countryLabel: UILabel = {
         let label = UILabel()
         label.text = "🇩🇪 Germany"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 22
+        label.layer.cornerRadius = 10
+        label.backgroundColor = .white
         return label
     }()
-    
-    private lazy var footLabel: UILabel = {
-        let label = UILabel()
-        label.text = "👣 Left foot"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textAlignment = .center
-        label.textColor = .black
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 22
-        return label
-    }()
-    
     
     //MARK: - Initialization
     
@@ -85,12 +73,9 @@ public final class PlayerDataView: UIView {
 extension PlayerDataView {
     
     private func configureUI() {
-        addSubviews(ampluaLabel, dateLabel, weightLabel, countryLabel, footLabel)
-        addBorderColor(dateLabel, weightLabel, countryLabel, footLabel)
-    }
-    
-    func configureView(with player: Player) {
-        ampluaLabel.text = "\(player.amplua), \(player.number)"
+        backgroundColor = .systemGray6
+        addSubviews(stackView)
+        stackView.addArrangedSubviews(dateLabel, countryLabel, weightLabel)
     }
 }
 
@@ -100,31 +85,11 @@ extension PlayerDataView {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            ampluaLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            ampluaLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            ampluaLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            ampluaLabel.heightAnchor.constraint(equalToConstant: 50),
-            
-            dateLabel.topAnchor.constraint(equalTo: ampluaLabel.bottomAnchor, constant: 20),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            dateLabel.heightAnchor.constraint(equalToConstant: 44),
-            dateLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.47),
-            
-            weightLabel.topAnchor.constraint(equalTo: ampluaLabel.bottomAnchor, constant: 20),
-            weightLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            weightLabel.heightAnchor.constraint(equalToConstant: 44),
-            weightLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.47),
-            
-            countryLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
-            countryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            countryLabel.heightAnchor.constraint(equalToConstant: 44),
-            countryLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.47),
-            
-            footLabel.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 10),
-            footLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            footLabel.heightAnchor.constraint(equalToConstant: 44),
-            footLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.47),
-            footLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 } 

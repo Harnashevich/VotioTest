@@ -18,7 +18,7 @@ extension UIView {
     func addBorderColor(_ views: UIView...) {
         views.forEach {
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+            $0.layer.borderColor = UIColor.gray.withAlphaComponent(0.4).cgColor
         }
     }
     
@@ -117,4 +117,9 @@ extension Double {
         let originalDecimal = newDecimal / multiplier // move the decimal back
         return originalDecimal
     }
+}
+
+extension UIColor {
+    
+    static var blue = UIColor(red: 12/255, green: 68/255, blue: 214/255, alpha: 1.0)
 }
