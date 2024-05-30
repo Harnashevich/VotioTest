@@ -16,6 +16,8 @@ public final class PlayerDataView: UIView {
         stack.axis = .horizontal
         stack.spacing = 10
         stack.distribution = .fillEqually
+        stack.backgroundColor = .white
+        stack.layer.cornerRadius = 10
         return stack
     }()
 
@@ -25,9 +27,6 @@ public final class PlayerDataView: UIView {
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10
-        label.backgroundColor = .white
         return label
     }()
     
@@ -37,9 +36,6 @@ public final class PlayerDataView: UIView {
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10
-        label.backgroundColor = .white
         return label
     }()
     
@@ -49,9 +45,6 @@ public final class PlayerDataView: UIView {
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10
-        label.backgroundColor = .white
         return label
     }()
     
