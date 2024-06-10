@@ -38,7 +38,7 @@ class VoteHeaderView: UICollectionReusableView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 20, weight: .medium)
         label.textAlignment = .center
         return label
     }()
@@ -46,7 +46,7 @@ class VoteHeaderView: UICollectionReusableView {
     private lazy var firstTeamLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textAlignment = .right
         return label
     }()
@@ -54,7 +54,7 @@ class VoteHeaderView: UICollectionReusableView {
     private lazy var secondTeamLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textAlignment = .left
         return label
     }()
@@ -144,7 +144,7 @@ extension VoteHeaderView {
             leageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             leageLabel.topAnchor.constraint(equalTo: xImageView.bottomAnchor, constant: 20),
             
-            bottomView.heightAnchor.constraint(equalToConstant: 20),
+            bottomView.heightAnchor.constraint(equalToConstant: 30),
             bottomView.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
             

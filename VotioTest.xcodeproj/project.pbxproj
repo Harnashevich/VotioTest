@@ -34,6 +34,8 @@
 		9F6FC8F32BC0074A00DA3E3F /* MatchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8F22BC0074A00DA3E3F /* MatchResultsModel.swift */; };
 		9F6FC8F52BC3E6D900DA3E3F /* PlayerScoresRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8F42BC3E6D900DA3E3F /* PlayerScoresRequestModel.swift */; };
 		9F6FC8F72BC3ECD800DA3E3F /* SimpleResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8F62BC3ECD800DA3E3F /* SimpleResponseModel.swift */; };
+		9F75CA402C10AD8100FCB396 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9F75CA3F2C10AD8100FCB396 /* SDWebImage */; };
+		9F75CA422C10AD8100FCB396 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F75CA412C10AD8100FCB396 /* SDWebImageMapKit */; };
 		9F8D99922BB4530400A0BB0A /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D99912BB4530400A0BB0A /* VoteCell.swift */; };
 		9F8D99942BB4536300A0BB0A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D99932BB4536300A0BB0A /* Extensions.swift */; };
 		9F9BFE022BC553EB00E5DA2C /* PlayerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFE012BC553EB00E5DA2C /* PlayerDetailsViewController.swift */; };
@@ -79,6 +81,8 @@
 				9F30D5262BE254E000323A2D /* Alamofire in Frameworks */,
 				9F30D52D2BE254EE00323A2D /* SDWebImageMapKit in Frameworks */,
 				9F30D5282BE254E000323A2D /* AlamofireDynamic in Frameworks */,
+				9F75CA422C10AD8100FCB396 /* SDWebImageMapKit in Frameworks */,
+				9F75CA402C10AD8100FCB396 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +216,8 @@
 				9F30D5272BE254E000323A2D /* AlamofireDynamic */,
 				9F30D52A2BE254EE00323A2D /* SDWebImage */,
 				9F30D52C2BE254EE00323A2D /* SDWebImageMapKit */,
+				9F75CA3F2C10AD8100FCB396 /* SDWebImage */,
+				9F75CA412C10AD8100FCB396 /* SDWebImageMapKit */,
 			);
 			productName = VotioTest;
 			productReference = 9F6297022BB30323005F9E77 /* VotioTest.app */;
@@ -554,6 +560,16 @@
 			productName = SDWebImage;
 		};
 		9F30D52C2BE254EE00323A2D /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+		9F75CA3F2C10AD8100FCB396 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		9F75CA412C10AD8100FCB396 /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9F30D5292BE254EE00323A2D /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;

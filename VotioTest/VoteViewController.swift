@@ -27,7 +27,7 @@ public final class VoteViewController: UIViewController {
         lazy var title = UILabel()
         title.text = "Voting list"
         title.textColor = .black
-        title.font = .systemFont(ofSize: 18, weight: .bold)
+        title.font = .systemFont(ofSize: 20, weight: .bold)
         title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(title)
         title.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -38,7 +38,7 @@ public final class VoteViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-//        tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 50, right: 0)
+//        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         tableView.register(
             VoteCell.self,
             forCellReuseIdentifier: VoteCell.identifier

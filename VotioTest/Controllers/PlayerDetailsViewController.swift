@@ -49,8 +49,9 @@ public final class PlayerDetailsViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.contentInset = UIEdgeInsets(top: view.frame.size.width * 0.13, left: 0, bottom: 0, right: 0)
+        scroll.contentInset = UIEdgeInsets(top: view.frame.size.width * 0.15, left: 0, bottom: 50, right: 0)
         scroll.alwaysBounceVertical = true
+        scroll.backgroundColor = .systemGray6
         return scroll
     }()
     

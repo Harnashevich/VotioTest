@@ -27,7 +27,7 @@ public class PlayersViewController: UIViewController {
         lazy var title = UILabel()
         title.text = "Players voting"
         title.textColor = .black
-        title.font = .systemFont(ofSize: 18, weight: .bold)
+        title.font = .systemFont(ofSize: 20, weight: .bold)
         title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(title)
         title.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -51,7 +51,7 @@ public class PlayersViewController: UIViewController {
         layout.scrollDirection = .vertical
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.contentInset = UIEdgeInsets(top: view.frame.size.width * 0.13, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: view.frame.size.width * 0.13, left: 0, bottom: 100, right: 0)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(

@@ -13,26 +13,23 @@ public final class RateViewController: UIViewController {
     
     private lazy var rateView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
         return view
     }()
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .lightGray
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .white
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 15
-        button.layer.masksToBounds = true
+        button.tintColor = .black
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(closeScreen), for: .touchUpInside)
         return button
     }()
     
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
-        label.text = "Rate"
+        label.text = "Choose rate"
         label.textColor = .black
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 22, weight: .bold)
@@ -55,9 +52,9 @@ public final class RateViewController: UIViewController {
     
     private lazy var deselectButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.backgroundColor = .lightGray.withAlphaComponent(0.2)
-        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .blue
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.setTitle("Deselect", for: .normal)
         button.isHidden = true
@@ -84,7 +81,6 @@ public final class RateViewController: UIViewController {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
         view.addSubviews(rateView, titleLabel, topStackView, bottomStackView, deselectButton)
-        view.addBorderColor(rateView)
         
         let closeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeScreen))
         blurEffectView.addGestureRecognizer(closeGestureRecognizer)
@@ -123,7 +119,8 @@ extension RateViewController {
         self.selectedScore = selectedScore
         oldScore = selectedScore
         deselectButton.isHidden = (selectedScore == 0)
-        
+        deselectButton.heightAnchor.constraint(equalToConstant: 0).isActive = (selectedScore == 0)
+
         print("selectedScore \(selectedScore)")
     }
     
@@ -156,18 +153,18 @@ extension RateViewController {
         
         guard self.scores.contains(score) else {
             button.isEnabled = false
-            button.backgroundColor = .lightGray
-            button.setTitleColor(.black, for: .normal)
+            button.backgroundColor = .systemGray4
+            button.setTitleColor(.gray, for: .normal)
             return
         }
         guard let selectedScore = selectedScore,
               selectedScore == score else {
-            button.backgroundColor = score > 0 ? .blue.withAlphaComponent(0.2) : .red.withAlphaComponent(0.2)
-            button.setTitleColor(score > 0 ? .blue : .red,
+            button.backgroundColor = .white
+            button.setTitleColor(.black,
                                  for: .normal)
             return
         }
-        button.backgroundColor = .black
+        button.backgroundColor = .blue
         button.setTitleColor(.white, for: .normal)
     }
     
@@ -178,7 +175,7 @@ extension RateViewController {
                 button.addTarget(self, action: #selector(ratingButtonTap), for: .touchUpInside)
                 button.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
                 button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
-                button.backgroundColor = .blue.withAlphaComponent(0.2)
+//                button.backgroundColor = .blue.withAlphaComponent(0.2)
                 return button
             }()
             
@@ -224,17 +221,17 @@ extension RateViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            closeButton.heightAnchor.constraint(equalToConstant: 30),
-            closeButton.widthAnchor.constraint(equalToConstant: 30),
+            closeButton.heightAnchor.constraint(equalToConstant: 40),
+            closeButton.widthAnchor.constraint(equalToConstant: 40),
             closeButton.trailingAnchor.constraint(equalTo: rateView.trailingAnchor, constant: -20),
-            closeButton.topAnchor.constraint(equalTo: rateView.topAnchor, constant: 30),
+            closeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             
             rateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             rateView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             rateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             rateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            titleLabel.topAnchor.constraint(equalTo: rateView.topAnchor, constant: 30),
+            titleLabel.topAnchor.constraint(equalTo: rateView.topAnchor, constant: 20),
             titleLabel.centerXAnchor.constraint(equalTo: rateView.centerXAnchor),
             
             topStackView.topAnchor.constraint(equalTo: rateView.topAnchor, constant: 90),
@@ -246,8 +243,8 @@ extension RateViewController {
             bottomStackView.trailingAnchor.constraint(equalTo: rateView.trailingAnchor, constant: -20),
             
             deselectButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 20),
-            deselectButton.leadingAnchor.constraint(equalTo: rateView.leadingAnchor, constant: 20),
-            deselectButton.trailingAnchor.constraint(equalTo: rateView.trailingAnchor, constant: -20),
+            deselectButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            deselectButton.widthAnchor.constraint(equalToConstant: 150),
             deselectButton.heightAnchor.constraint(equalToConstant: 40),
             deselectButton.bottomAnchor.constraint(equalTo: rateView.bottomAnchor, constant: -20)
         ])

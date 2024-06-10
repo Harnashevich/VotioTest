@@ -25,6 +25,7 @@ public final class PlayerCell: UICollectionViewCell {
         image.image = UIImage(named: "playerBackgroundView")
         image.layer.cornerRadius = 10
         image.layer.masksToBounds = true
+        image.clipsToBounds = true
         return image
     }()
     
@@ -79,7 +80,7 @@ public final class PlayerCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.backgroundColor = .white
-        stack.layer.cornerRadius = 10
+        stack.layer.cornerRadius = 8
         stack.clipsToBounds = true
         stack.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.scoreTapped))
@@ -112,7 +113,7 @@ public final class PlayerCell: UICollectionViewCell {
         label.text = "Vote"
         label.textColor = .blue
         label.backgroundColor = .white
-        label.layer.masksToBounds = true
+        label.clipsToBounds = true
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
@@ -258,7 +259,7 @@ extension PlayerCell {
             numberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             numberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             
-            secondNameLabel.topAnchor.constraint(equalTo: playerBackgroundImageView.bottomAnchor),
+            secondNameLabel.topAnchor.constraint(equalTo: playerBackgroundImageView.bottomAnchor, constant: 10),
             secondNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: secondNameLabel.bottomAnchor, constant: 2),
