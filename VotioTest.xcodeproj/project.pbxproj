@@ -26,6 +26,7 @@
 		9F62970A2BB30323005F9E77 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6297092BB30323005F9E77 /* VoteViewController.swift */; };
 		9F62970F2BB30325005F9E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F62970E2BB30325005F9E77 /* Assets.xcassets */; };
 		9F6297122BB30325005F9E77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6297102BB30325005F9E77 /* LaunchScreen.storyboard */; };
+		9F6A772A2C199D7C00D947E1 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6A77292C199D7C00D947E1 /* SuccessViewController.swift */; };
 		9F6FC8DC2BBEB0E100DA3E3F /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */; };
 		9F6FC8DE2BBEB14E00DA3E3F /* HelloResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8DD2BBEB14E00DA3E3F /* HelloResponseModel.swift */; };
 		9F6FC8EA2BBEC8D300DA3E3F /* PollsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */; };
@@ -59,6 +60,7 @@
 		9F62970E2BB30325005F9E77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F6297112BB30325005F9E77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F6297132BB30325005F9E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F6A77292C199D7C00D947E1 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		9F6FC8DB2BBEB0E100DA3E3F /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		9F6FC8DD2BBEB14E00DA3E3F /* HelloResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloResponseModel.swift; sourceTree = "<group>"; };
 		9F6FC8E92BBEC8D300DA3E3F /* PollsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsResponseModel.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				9F48B4C62BB5AA7700631BC0 /* PlayersViewController.swift */,
 				9F48B4CA2BB5B98200631BC0 /* RatePlayerViewController.swift */,
 				9F9BFE012BC553EB00E5DA2C /* PlayerDetailsViewController.swift */,
+				9F6A77292C199D7C00D947E1 /* SuccessViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				9F1C04F62BC6B2E70010CE43 /* RatingView.swift in Sources */,
 				9F4F59892BC825E000C152FE /* MastershipCell.swift in Sources */,
 				9F8D99922BB4530400A0BB0A /* VoteCell.swift in Sources */,
+				9F6A772A2C199D7C00D947E1 /* SuccessViewController.swift in Sources */,
 				9F6FC8F52BC3E6D900DA3E3F /* PlayerScoresRequestModel.swift in Sources */,
 				9F4F4B722C04D51400535BCB /* PlayerImageView.swift in Sources */,
 				9F1C04F82BC6C9EE0010CE43 /* StatsView.swift in Sources */,

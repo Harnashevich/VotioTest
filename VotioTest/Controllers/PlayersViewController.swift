@@ -267,6 +267,9 @@ extension PlayersViewController {
             switch result {
             case true:
                 print("Проголосовано успешно")
+                let successVC = SuccessViewController()
+                successVC.modalPresentationStyle = .overFullScreen
+                present(successVC, animated: false)
                 self.fetchPoll()
             case false:
                 print("Проголосовано НЕУСПЕШНО")
